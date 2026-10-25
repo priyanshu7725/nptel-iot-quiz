@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IoT NPTEL Quiz</title>
+<meta name="theme-color" content="#4f46e5"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="IoT Quiz">
+<style>
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f5fb;--card:#fff;--tx:#161a29;--mu:#677089;--ac:#4f46e5;--ac2:#9333ea;--ok:#16a34a;--bad:#dc2626;--bd:#e3e6f0;--sh:0 1px 2px rgba(20,24,60,.04),0 6px 20px rgba(20,24,60,.06);--r:16px}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e1017;--card:#181c27;--tx:#e8eaf3;--mu:#98a0b6;--ac:#6e76f2;--ac2:#a855f7;--ok:#4ade80;--bad:#f87171;--bd:#2a3044;--sh:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
+:root[data-theme=dark]{--bg:#0e1017;--card:#181c27;--tx:#e8eaf3;--mu:#98a0b6;--ac:#6e76f2;--ac2:#a855f7;--ok:#4ade80;--bad:#f87171;--bd:#2a3044;--sh:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+button,label{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+.tb{max-width:960px;margin:0 auto;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:700;line-height:1.15}.brand small{display:block;font-weight:500;font-size:.72rem;color:var(--mu)}
+.lg{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center}
+main{max-width:960px;margin:0 auto;padding:20px 16px 56px}
+main>*{animation:in .3s ease both}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mu{color:var(--mu)}.tag{color:var(--mu);font-size:.85rem}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:center;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:24px;padding:28px;box-shadow:var(--sh)}
+.hero h1{font-size:1.9rem;line-height:1.15;margin:0 0 8px;letter-spacing:-.02em}.hp{margin:0;opacity:.92}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats div{background:rgba(255,255,255,.16);border-radius:14px;padding:12px;text-align:center}.stats b{display:block;font-size:1.5rem;line-height:1.2}.stats span{font-size:.75rem;opacity:.92}
+.sh{margin:30px 0 12px;font-size:1.1rem;letter-spacing:-.01em}
+.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.mode,.tile{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:16px;box-shadow:var(--sh);transition:.15s;text-align:left}
+.mode:hover,.tile:hover{transform:translateY(-2px);border-color:var(--ac)}.mode:active,.tile:active{transform:scale(.98)}
+.mode{display:flex;align-items:center;gap:14px}
+.mode i{font-style:normal;font-size:1.5rem;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--ac) 12%,var(--card));flex:none}
+.mode b,.tile b{display:block;line-height:1.25}.mode span{color:var(--mu);font-size:.85rem}
+.tile{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;padding:14px}
+.wk{grid-row:span 2;width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;display:grid;place-items:center;font-weight:700}
+.mini{grid-column:1/-1;height:5px;border-radius:9px;background:var(--bd);margin-top:10px;overflow:hidden}.mini i{display:block;height:100%;background:var(--ok)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:16px;box-shadow:var(--sh)}
+.sw{display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--mu)}.sw input{width:20px;height:20px;accent-color:var(--ac)}
+.chip{position:relative}.chip input{position:absolute;opacity:0}.chip span{display:inline-block;padding:8px 14px;border:1.5px solid var(--bd);border-radius:99px;margin:0 6px 8px 0}.chip input:checked+span{background:var(--ac);color:#fff;border-color:var(--ac)}
+input[type=number]{font:inherit;font-size:16px;padding:9px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);width:72px}
+.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0;border-radius:12px;padding:13px 22px;font-weight:600;box-shadow:var(--sh)}
+.sec{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:9px 14px}
+.qw{max-width:720px;margin:0 auto}
+.qh{display:flex;align-items:center;gap:12px}.qt{flex:1;line-height:1.25}.qt b{display:block}.qt span{color:var(--mu);font-size:.85rem}
+.sc{font-weight:700;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:7px 12px}
+.bar{height:8px;background:var(--bd);border-radius:9px;overflow:hidden;margin:14px 0 16px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .3s}
+.qc{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px;box-shadow:var(--sh)}
+.qc h2{font-size:1.25rem;margin:14px 0 16px;line-height:1.4;letter-spacing:-.01em}
+.chip2{font-size:.75rem;font-weight:600;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--ac) 12%,var(--card));color:var(--ac)}.chip2.m{background:color-mix(in srgb,#f59e0b 18%,var(--card));color:#d97706}
+.star{margin-left:auto;padding:4px 12px;font-size:1.05rem}
+.opt{display:flex;align-items:flex-start;width:100%;text-align:left;min-height:54px;padding:12px 14px;margin:8px 0;background:var(--card);border:1.5px solid var(--bd);border-radius:14px;line-height:1.4;transition:.12s}
+.opt:hover:not(:disabled){border-color:var(--ac)}.opt:active:not(:disabled){transform:scale(.99)}
+.opt b{flex:none;width:28px;height:28px;line-height:28px;text-align:center;border-radius:8px;background:var(--bd);margin-right:12px;font-size:.85rem}
+.opt span{padding-top:2px}
+.opt.sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}.opt.sel b{background:var(--ac);color:#fff}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}.opt.ok b,.opt.miss b{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}.opt.bad b{background:var(--bad);color:#fff}
+.opt.miss{border:1.5px dashed var(--ok);background:color-mix(in srgb,var(--ok) 8%,var(--card))}
+.opt.ok::after,.opt.bad::after,.opt.miss::after{margin-left:auto;padding-left:8px;font-weight:700;white-space:nowrap}
+.opt.ok::after{content:"✓";color:var(--ok)}.opt.bad::after{content:"✗";color:var(--bad)}.opt.miss::after{content:"Missed";color:var(--ok);font-size:.8rem}
+.ex{margin-top:14px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac) 9%,var(--card));border-left:4px solid var(--ac);font-size:.93rem;line-height:1.45}
+#nx{position:sticky;bottom:0;padding:12px 0 8px;margin-top:8px;background:linear-gradient(transparent,var(--bg) 35%)}#nx .pri{width:100%;padding:15px}
+.rs{text-align:center;padding:8px 0 4px}.rs h1{margin:16px 0 4px;font-size:1.6rem}
+.ring{width:170px;height:170px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:conic-gradient(var(--ac) calc(var(--p)*1%),var(--bd) 0)}
+.ring>div{width:134px;height:134px;border-radius:50%;background:var(--bg);display:grid;place-content:center}.ring b{font-size:2.4rem;line-height:1}.ring span{color:var(--mu);font-size:.85rem}
+.m3{display:flex;gap:10px;justify-content:center;margin:16px 0}.m3 div{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 18px;min-width:84px}.m3 b{display:block;font-size:1.25rem}.m3 span{font-size:.75rem;color:var(--mu)}
+.res{justify-content:center}
+.rv{margin:10px 0}.rv p{margin:8px 0}.ca{color:var(--ok);font-weight:600}
+.a2h{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;background:var(--card);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh)}.a2h>div{flex:1;line-height:1.25}.a2h b{display:block}.a2h .pri{padding:9px 18px}.x{background:none;border:0;color:var(--mu);padding:6px;font-size:1rem}
+.ov{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;animation:in .2s}.sheet{width:100%;max-width:480px;background:var(--card);color:var(--tx);border-radius:22px 22px 0 0;padding:22px 20px calc(20px + env(safe-area-inset-bottom,0px))}.sheet ol{margin:0 0 16px;padding-left:22px}.sheet li{margin:8px 0}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding:22px}.hero h1{font-size:1.5rem}.g2,.g3{grid-template-columns:1fr}.res{flex-direction:column;align-items:stretch}.res button{width:100%;padding:14px}main{padding:14px 12px 40px}.qc{padding:16px}}
+</style></head><body><header class="top"><div class="tb"><div class="brand" onclick="home()"><span class="lg">🧠</span><span>IoT Quiz<small>NPTEL · IIT Kharagpur</small></span></div><button class="sec" onclick="theme()" aria-label="Toggle theme">◐</button></div></header><main id="app"></main>
+<script>
+const q=(t,o,a)=>({t,o,a});
+const TF=["True","False"];
+const W={
+5:{n:"Week 5 · Interoperability & Arduino",q:[
+q("What does interoperability allow IoT devices to do?",["Communicate and exchange data","Work only offline","Use only one protocol","Disable other devices"],0),
+q("Syntactic interoperability deals with:",["Message format","Battery size","Device colour","Sensor weight"],0),
+q("What does UMB stand for?",["Universal Middleware Bridge","Unified Mobile Board","Universal Memory Block","User Management Bridge"],0),
+q("What is the operating voltage of the Arduino UNO?",["3.3 V","5 V","9 V","12 V"],1),
+q("What is a program written in the Arduino IDE called?",["Packet","Sketch","Frame","Query"],1),
+q("Which interface is mainly used to connect an Arduino UNO to a computer?",["HDMI","USB","VGA","Ethernet"],1),
+q("What is the conventional starting index of an array in Arduino programming?","-1,0,1,2".split(","),1),
+q("Which Arduino function generates a pseudo-random number within a range?",["random()","pinMode()","digitalWrite()","attachInterrupt()"],0),
+q("In the traffic-control example, which LED is switched ON first for the GO signal?",["Red LED","Yellow LED","Green LED","All three LEDs simultaneously"],2),
+q("Which quantities are measured by a DHT sensor?",["Temperature and humidity","Distance and speed","Light and sound","Pressure and altitude"],0),
+q("What does a sensor convert a physical quantity into?",["A software program","Mechanical motion","A network address","An electrical signal"],3),
+q("In the DHT sketch, delay(2000) makes successive readings appear after about:",["0.2 seconds","1 second","2 seconds","20 seconds"],2),
+q("True or False: A servo motor is a low-precision motor used only for linear motion.",TF,1),
+q("Which device provides controlled rotary motion?",["Ultrasonic sensor","DHT sensor","PIR sensor","Servo motor"],3),
+q("True or False: A stepper motor is a type of actuator.",TF,0)]},
+6:{n:"Week 6 · Python & Raspberry Pi",q:[
+q("What are the five basic data types in Python, as introduced in the lecture?",["Numbers, Strings, List, Tuple, Dictionary","Integer, Float, Boolean, Char, Byte","Array, Struct, Class, Object, Set","Numbers, Strings, Queue, Stack, Graph"],0),
+q("Which keyword defines a function in Python?",["func","def","define","function"],1),
+q("Which keyword handles an exception raised inside the try block?",["catch","except","handle","rescue"],1),
+q("Which open() mode adds data to the end of a file without erasing it?",["r (read)","w (write)","a (append)","r+ (read and write)"],2),
+q("Which pip-installable library is used for image read/write in the lecture?",["NumPy","PIL / Pillow","OpenCV","Matplotlib"],1),
+q("Which socket_type is used for a TCP/IP socket?",["SOCK_DGRAM","SOCK_STREAM","SOCK_RAW","SOCK_SEQPACKET"],1),
+q("How many GPIO pins does the Raspberry Pi 3 Model B have?",["26","32","40","44"],2),
+q("Which is an officially supported OS for Raspberry Pi?",["Raspbian","Windows XP","macOS","Solaris"],0),
+q("Raspberry Pi is best described as a:",["Printer","Smartphone","Wi-Fi router","Single-board computer"],3),
+q("Which command installs the GPIO library before the blinking LED example?",["sudo apt-get install python-rpi.gpio","pip install gpio","sudo apt-get install led-lib","npm install rpi-gpio"],0),
+q("Where is the CSI camera connector slot on the Raspberry Pi?",["Between the USB ports","Between the Ethernet port and the HDMI port","Next to the power supply pin","On the underside of the board"],1),
+q("Which terminal command captures a still image with the Pi camera?",["raspistill -o image.jpg","raspicam capture","pi-camera snap","capture.py --img"],0),
+q("What does DHT stand for?",["Digital Heat Transfer","Digital Humidity and Temperature","Direct Hardware Trigger","Dual Humidity Thermostat"],1),
+q("How many output terminals does the relay in the auto-cooling system have?",["2","3","4","5"],1),
+q("True or False: The fan operates when the temperature rises above the threshold in the code.",TF,0)]},
+7:{n:"Week 7 · Remote Logging & SDN",q:[
+q("Which socket type sends sensor data from client to server in the logging system?",["SOCK_STREAM","SOCK_DGRAM","SOCK_RAW","SOCK_SEQPACKET"],1),
+q("Which Adafruit function reads humidity and temperature from the DHT sensor?",["Adafruit_DHT.read_retry()","Adafruit_DHT.get_data()","Adafruit_DHT.sense()","Adafruit_DHT.capture()"],0),
+q("Where does the server save the data received from the client?",["A MySQL database","A text file named Datalog.txt","A cloud dashboard","An Excel spreadsheet"],1),
+q("Which Python function splits comma-separated data into values?",["split()","divide()","partition()","separate()"],0),
+q("True or False: Matplotlib is used to plot temperature and humidity data at the server.",["False","True"],1),
+q("Which matplotlib function turns on interactive mode?",["ion()","grid()","subplot()","figure()"],0),
+q("In a traditional (non-SDN) network, where does OSPF logic mainly execute?",["In a centralized controller","At the individual switches","On the end-user device","In the cloud"],1),
+q("In which year was the OpenFlow project presented at ACM SIGCOMM?",["2006","2008","2009","2011"],1),
+q("What does a switch send the controller when no matching flow-rule exists?",["PACKET-IN message","FLOW-REQUEST message","RULE-MISS alert","CONTROL-SYNC message"],0),
+q("Which SDN API connects the control layer and the infrastructure layer?",["Northbound API","Southbound API","East-Westbound API","North-Southbound API"],1),
+q("About how many requests per second can a typical SDN controller handle on a single thread?",["50","100","200","500"],2),
+q("Which control mechanism has a single controller making all decisions?",["Distributed control","Centralized control","Hierarchical control","Federated control"],1),
+q("Which is a listed benefit of integrating SDN with IoT?",["Increased hardware cost","Visibility of network resources","Reduced sensor accuracy","Elimination of all controllers"],1),
+q("Which resource constraint motivates software-defined WSN?",["Excess bandwidth","Limited memory for control programs","Too many controllers","Unlimited computation power"],1),
+q("In the SDN-WISE stack, what does INPP stand for?",["Integrated Node Path Protocol","Internal Node Power Processing","In Network Packet Processing","IoT Network Priority Protocol"],2)]},
+3:{n:"Week 3 · Wireless Standards & NFC",q:[
+q("True or False: There is no network layer in Wired HART.",TF,0),
+q("Z-Wave operates at ___ MHz in the US and ___ MHz in Europe.",["1008, 989","908.42, 868.42","767.56, 855.28","None of these"],1),
+q("Dumb behavior of sensor nodes is ___ in nature.",["Temporal","Spatial","Both (a) and (b)","None of these"],0),
+q("Identifying channels consistently hit by interference and removing them from use is known as:",["Channel Trimming","Channel Flushing","Both (a) and (b)","None of these"],3),
+q("The full form of NFC is:",["Near Field Contact","Near Field Communication","Both (a) and (b)","Neither (a) nor (b)"],1),
+q("True or False: NFC works on the principle of magnetic induction.",TF,0),
+q("True or False: NFC tags in supermarket products are examples of active NFC.",TF,1),
+q("Bluetooth is based on ___.",["Nanonets","Binarynets","Both (a) and (b)","None of these"],3),
+q("A ___ in NFC emits a small electric current that creates a magnetic field bridging the devices.",["reader","writer","destroyer","None of these"],0),
+q("True or False: Bluetooth technology is based on ad-hoc network technology.",["False","True"],1),
+q("True or False: Z-Wave uses GFSK modulation and Hongkong channel encoding.",TF,1),
+q("Bypassing radio dead-spots in Z-Wave is done using a message called:",["Ping","Healing","Frame","None of these"],1),
+q("True or False: Sensor nodes have unlimited battery life.",TF,1),
+q("True or False: The Link Manager Protocol in Bluetooth manages establishment, authentication and link configuration.",TF,0),
+q("Zigbee commonly uses ___ data rate.",["250 kbps","250 Mbps","260 kbps","260 Mbps"],0)]},
+8:{n:"Week 8 · SDN for IoT & Cloud Basics",q:[
+q("Which is a problem in traditional (non-SDN) mobile networks?",["Too flexible hardware architecture","Excess centralized control","Very low operational cost","Difficult to scale due to static, over-provisioned networks"],3),
+q("In ODIN, what does the Odin agent do?",["Sits at the controller end to manage policies","Replaces OpenFlow entirely","Sits with the physical devices to talk to the controller","Performs billing for cloud resources"],2),
+q("What is the goal of Mobi-Flow’s proactive rule placement?",["Place flow-rules randomly across all APs","Predict users’ future location and place flow-rules at APs accordingly","Eliminate the need for a controller","Increase the number of PACKET-IN messages"],1),
+q("Which tool simulates wireless SDN with both wired and IEEE 802.11 protocols?",["CloudSim","NS2","GreenCloud","Mininet-WiFi"],3),
+q("NIST says cloud computing gives on-demand access to a shared pool of:",["Fixed, dedicated hardware resources","Configurable computing resources","Only storage resources","Only networking resources"],1),
+q("Which is an essential NIST characteristic of cloud computing?",["Rapid elasticity","Manual resource allocation","Single-tenant only access","Fixed billing regardless of usage"],0),
+q("Which deployment model is for the exclusive use of a single organization?",["Public cloud","Private cloud","Community cloud","Multi-cloud"],1),
+q("Which is an example of a public cloud provider?",["Amazon Web Services (AWS)","A company’s internal data center","A dedicated server room","A community-only cloud shared by hospitals"],0),
+q("Which service model delivers servers, storage, network and OS on demand?",["SaaS","PaaS","IaaS","DBaaS"],2),
+q("In IaaS, which component lets multiple VMs share the same hardware?",["DNS server","Load balancer","Firewall","Hypervisor"],3),
+q("Which model is “application middleware offered as a service to developers”?",["IaaS","SaaS","PaaS","Community Cloud"],2),
+q("What is the primary purpose of an SLA?",["Define the physical location of the data center","Define the non-functional requirements expected from the provider","Specify the provider’s programming language","List the provider’s hardware vendors"],1),
+q("What does service accounting primarily aim to obtain?",["Resource usage information, typically as records","End-users’ physical addresses","Source code of hosted apps","The provider’s marketing budget"],0),
+q("Why use cloud simulators such as CloudSim before deployment?",["To permanently replace real cloud infrastructure","To manufacture cloud hardware","To increase billing cost","To get a reliable, scalable, repeatable pre-deployment evaluation environment"],3),
+q("CloudSim was developed at which institution, and in which language?",["Stanford University, Python","CLOUDS Lab, University of Melbourne, Java","MIT, C++","IIT Kharagpur, JavaScript"],1)]},
+9:{n:"Week 9 · OpenStack, Sensor-Cloud & Fog",q:[
+q("OpenStack was launched in 2010 by Rackspace Hosting and which organization?",["Google","Microsoft","NASA","IBM"],2),
+q("Which OpenStack component is the dashboard (GUI)?",["Nova","Keystone","Horizon","Swift"],2),
+q("Which OpenStack component is the compute service?",["Nova","Glance","Cinder","Neutron"],0),
+q("Which tool installs OpenStack via a configured local.conf?",["stack.sh via Devstack","docker-compose","kubeadm","ansible-playbook"],0),
+q("What does sensor-cloud fundamentally provide?",["A physical replacement for sensor hardware","Virtualization of sensor nodes on a pay-per-use basis","Elimination of the sink node","Free unlimited sensor deployment"],1),
+q("In a traditional WSN, who handles redeployment of sensor nodes?",["The SCSP","The sensor-cloud end-user","The WSN-user","A third-party auditor"],2),
+q("Which actor buys physical sensors and lends them to the sensor-cloud?",["End-user","Sensor-owner","SCSP","WSN-user"],1),
+q("Which limitation of traditional WSNs motivates sensor-cloud?",["Unlimited scalability at zero cost","Difficulty adapting to a change of requirement","Excess skilled vendors","No need for maintenance"],1),
+q("What does CoV-I refer to?",["Virtual sensors across multiple regions","Virtual sensors from homogeneous nodes in the same region","A pricing model","A caching mechanism"],1),
+q("Which cache serves end-user requests and decides whether to re-cache?",["External Cache (EC)","Sensor Cache (SC)","Distributed Cache (DC)","Internal Cache (IC)"],3),
+q("Why is adaptive data caching useful in sensor-cloud?",["Environments always change fast","It removes the sensor-owner","It eliminates virtualization","Needless sensing during slow change wastes energy"],3),
+q("Which company coined the term fog computing?",["Google","Amazon","CISCO","IBM"],2),
+q("Which cloud-model issue motivates fog computing?",["Excess bandwidth","Volume, latency and bandwidth limits","Too much device processing power","No IoT devices"],1),
+q("Where is the fog layer positioned?",["Above the cloud","Between the cloud and the IoT devices","Inside each IoT device only","It replaces the cloud"],1),
+q("Which is NOT a required characteristic of a fog node?",["Transient storage","Computing for quick decisions","Network connectivity","Permanent, unlimited archival storage"],3)]},
+1:{n:"Week 1 · IoT Basics, Sensing & Actuation",q:[
+q("Per the ITU Internet Report 2005, the future Internet becomes wider and more complex mainly because:",["Humans will stop using the Internet","Most traffic may flow between devices and things","Only desktop computers remain connected","Communication is restricted to email"],1),
+q("Which are characteristics of IoT systems?",["Efficient and scalable architecture","Unambiguous naming and addressing","Sleeping nodes, mobile nodes and non-IP devices","Guaranteed continuous connectivity at all times"],[0,1,2]),
+q("“Smart Dust” refers to:",["A cloud storage model for IoT data","A large-scale wireless router","Tiny computing devices that can be sprayed or injected for sensing","A type of IPv6 address"],2),
+q("Which best explains the relation between IoT and M2M?",["They are exactly the same","M2M is broader than IoT","M2M is a part of IoT; IoT has a broader scope","IoT does not include M2M"],2),
+q("True or False: In the Web of Things, IoT sensors are replaced completely by cloud databases.",TF,1),
+q("Local addresses valid only within a gateway’s domain (and reusable under another gateway) mainly:",["Increase address consumption","Help conserve address space","Remove the need for a gateway","Prevent Internet communication"],1),
+q("Which functions are associated with IoT gateways in the addressing strategy?",["Providing Internet connectivity","Supporting IoT LAN intra-connectivity","Obtaining upstream prefixes via DHCPv6","Delegating addresses to nodes using SLAAC"],[0,1,2,3]),
+q("Which is true about IPv6 compared to IPv4?",["Uses dotted decimal notation","Has a smaller address space","Uses hexadecimal notation and a much larger address space","Requires broadcast addresses like IPv4"],2),
+q("What is the design expectation from a good sensor?",["Influence the measured property significantly","Respond strongly to unrelated properties","Be sensitive to the measured property and not disturb it","Always produce random output"],2),
+q("Which statements about sensor resolution are correct?",["It is the smallest change the sensor can detect","For digital sensors, it relates to the smallest digital output change","Resolution and accuracy always mean exactly the same","Accuracy does not depend only on resolution"],[0,1,3]),
+q("True or False: An accelerometer measuring along x, y and z axes is a vector sensor.",TF,0),
+q("Different output for the same input depending on the direction of approach is called:",["Quantization error","Hysteresis error","IPv6 translation error","Gateway prefix error"],1),
+q("True or False: A hydraulic actuator can produce considerable force because liquids are nearly incompressible.",["False","True"],1),
+q("Which are correct about Shape Memory Polymer actuators?",["Respond to stimuli like light, heat, electrical, magnetic, pH or moisture","Can show high strain recovery","May have low density and biocompatibility","Used only as passive temperature sensors"],[0,1,2]),
+q("True or False: Sensor data travels through a gateway and a proxy server before reaching the cloud server.",TF,0)]},
+2:{n:"Week 2 · MQTT, CoAP, AMQP & 802.15.4",q:[
+q("In MQTT, which field of a published message is the broker’s routing information?",["Topic","Client identifier","Payload length","Session timer"],0),
+q("Which statements about MQTT wildcards are correct?",["+ matches an arbitrary value at exactly one level","# subscribes to all underlying levels","house/# matches only the exact topic house","house/+/temperature can match house/kitchen/temperature"],[0,1,3]),
+q("Which are main stages of Secure MQTT (SMQTT)?",["Setup","Publish","Decryption","Route discovery"],[0,1,2]),
+q("CoAP operates over which transport protocol?",["TCP","UDP","SCTP","FTP"],1),
+q("True or False: In CoAP, a piggyback response is carried with the acknowledgment; in separate mode it is sent in a separate message.",TF,0),
+q("Which CoAP request-method mappings are correct?",["GET - retrieve data","PUT - create data","PUSH - update data","DELETE - delete data"],[0,1,2,3]),
+q("Which AMQP frame type controls the message-flow rate?",["Transfer","Detach","Disposition","Flow"],3),
+q("Which statements about AMQP components are correct?",["An exchange receives messages and routes them to queues","A queue stores messages for consumers or business processes","A binding specifies distribution rules between an exchange and queues","A consumer must route every producer message before it reaches an exchange"],[0,1,2]),
+q("Which IEEE 802.15.4 variant-application pairs are correct?",["802.15.4c - China","802.15.4e - Industrial applications","802.15.4f - Active RFID","802.15.4g - Smart utility networks"],[0,1,2,3]),
+q("In a non-beacon-enabled 802.15.4 network, data frames use:",["Slotted CSMA/CA","Unslotted CSMA/CA","Token passing","Pure TDMA only"],1),
+q("What is the relationship between IEEE 802.15.4 and ZigBee?",["802.15.4 provides layers 1 and 2; ZigBee extends to layer 3 and above","ZigBee provides only the physical layer","Both operate only at the application layer","They are identical standards"],0),
+q("Which characterize a ZigBee end device?",["Communicates with its parent node","Cannot relay data for other devices","Is a reduced-functionality device","Forms the network root and acts as trust center"],[0,1,2]),
+q("Which describes addressing in 6LoWPAN?",["16-bit is globally unique; 64-bit is PAN-specific","16-bit short address is PAN-specific (assigned by the PAN coordinator); 64-bit extended is globally unique","Both are globally unique and assigned by an Internet router","Both are used only for multicast"],1),
+q("True or False: In LOADng, an intermediate router may respond to an RREQ if it has an active route.",TF,1),
+q("How does a passive RFID tag get power to transmit?",["Its own internal battery","Inductively from an RFID reader","A wired AIDC connection","It needs no power"],1)]},
+4:{n:"Week 4 · Sensor Networks, UAV & M2M",q:[
+q("What does the ultrasonic sensor measure in the AID system?",["Humidity","Distance of the object","Soil pH","Light intensity"],1),
+q("Which component processes sensor data in the AID system?",["Camera","NFC tag","Microcontroller","Ultrasonic sensor"],2),
+q("How can standard nanodevices communicate?",["Electromagnetic communication","Molecular communication","Wired Ethernet","ZigBee communication"],[0,1]),
+q("When does sensing coverage guarantee network connectivity?",["Transmission range ≥ twice the sensing range","Sensing range ≥ twice the transmission range","Ranges are equal","Transmission range is smaller than sensing range"],0),
+q("Which is a coverage problem in a static WSN?",["Area coverage","Data compression","Route encryption","Clock synchronization"],0),
+q("Which reporting method is used for forest-fire monitoring?",["Event-driven reporting","On-demand reporting","Manual reporting","Location-based reporting"],0),
+q("What does a data mule do?",["Replaces all sensor nodes","Measures only temperature","Collects data and carries it to the sink","Repairs damaged hardware"],2),
+q("What may happen if a critical stationary sensor node fails?",["The network may be partitioned","All nodes become mobile","The sensing range doubles","The network repairs itself by movement"],0),
+q("A person who provides sensing information acts as a:",["Router","Radio channel","Actuator","Data source"],3),
+q("Which is an advantage of a stationary WSN?",["Easy topology maintenance","Automatic movement after node failure","Continuously changing topology","Unpredictable sensor locations"],0),
+q("True or False: In a UAV network, topology may change frequently because UAVs are mobile.",TF,0),
+q("Which is a common issue in UAV networks?",["Frequent topology changes","Fixed relative positions","Permanent communication links","No possibility of UAV failure"],0),
+q("Compared with traditional SCADA, M2M supports:",["Only isolated systems","No device communication","Continuous human control","Cross-platform integration"],3),
+q("True or False: In a stationary WSN, nodes can automatically move to restore connectivity after a failure.",TF,1),
+q("Which statement best describes M2M communication?",["Devices exchange data without direct human control","Every data exchange is manual","Only one device can communicate at a time","Devices cannot communicate through a network"],0)]},
+10:{n:"Week 10 · Smart Cities & Connected Vehicles",q:[
+q("In the human–smart city analogy, Sensors and Tags correspond to:",["Skeleton","Nerves","Sensory Organs","Brain"],2),
+q("Which is one of the six application focus areas of a smart city?",["Smart Economy","Smart Bandwidth","Smart Voltage","Smart Currency"],0),
+q("Which area deals with auto routing of vehicles to empty slots?",["Smart Homes","Smart Energy","Smart Health","Smart Parking Lots"],3),
+q("Which challenge covers data leakage from multiple tenants sharing infrastructure?",["Reliability","Heterogeneity","Security and Privacy","Legal and Social aspects"],2),
+q("What is the primary purpose of data fusion in smart cities?",["Delete redundant sensors","Make large incoming data precise and accurate for better decisions","Replace the need for sensors","Increase network latency"],1),
+q("Which fusion challenge is the same sensor type reporting different data for the same location?",["Imperfection","Ambiguity","Conflicts","Alignment"],2),
+q("At which fusion level does fusion happen at the sensor node or local network?",["Decision level","Feature level","Pixel level","Signal level"],3),
+q("Which is one of the three functional layers of a smart parking system?",["Information Collection","Fuel Refilling","Vehicle Manufacturing","Traffic Signal Coloring"],0),
+q("Which energy harvesting type uses sources intentionally deployed near IoT devices?",["Ambient","Passive","Grid-tied","Dedicated"],3),
+q("Which HAN standard has PHY/MAC defined by IEEE 802.15.4 for low-cost, low-energy devices?",["UPnP","DLNA","Zigbee","X-10"],2),
+q("Which HAN standard controls devices over existing power lines?",["Konnex (KNX)","UPnP","LonWorks","X-10"],3),
+q("Why does traditional TCP/IP work poorly for V2X?",["Designed for single-pair exchange dependent on data location","Cannot be used with wireless devices","Requires no IP addresses","Works only in stationary networks"],0),
+q("Which spectrum did US DoT and FCC allocate for ICVs?",["2.4 GHz ISM band","75 MHz (5850–5925 MHz)","900 MHz band","60 GHz mmWave band"],1),
+q("Which ICV phase is based on 4G LTE or DSRC for intelligent transportation services?",["Phase-1","Phase-2","Phase-3","Phase-0"],1),
+q("Which VANET domain has vehicles (mobile) and RSUs (static) communicating via DSRC?",["In-Vehicle Domain","Cloud Domain","Infrastructure Domain","Ad-hoc Domain"],3)]},
+11:{n:"Week 11 · Smart Grid, IIoT & Big Data",q:[
+q("What distinguishes a smart grid from a traditional grid?",["One-directional distribution","Manual monitoring and restoration","Bidirectional energy flow with two-way communication and control","Generation only at centralized plants"],2),
+q("What is the role of a smart meter in a smart home?",["Generates renewable electricity","Provides the Smart Grid interface between consumer and energy provider","Replaces the home energy management system","Works only as a one-way meter"],1),
+q("Under Time-of-Use pricing, when should consumers run smart appliances?",["During off-peak hours","Only during on-peak hours","Only during a blackout","At a fixed time regardless of load"],0),
+q("In net metering, the final bill depends on which two flows?",["Reactive power and communication traffic","Only energy from centralized plants","Only energy in the consumer’s battery","Energy inflow from the grid and outflow to the grid"],3),
+q("Which device samples voltage and current for transmission monitoring?",["Phasor Measurement Unit (PMU)","Data Aggregator Unit (DAU)","Smart appliance controller","Universal Power Line Bus"],0),
+q("Which is a function of distribution intelligence?",["Preventing all use of smart meters","Identifying outage sources and supporting automatic power-flow restoration","Restricting the grid to one-way communication","Removing protection from feeder lines"],1),
+q("In smart grid communication, a gateway connects:",["Closely located smart meters to DAUs","Power plants directly to home appliances","PMUs directly to plug-in EVs","Renewables directly to SCADA"],0),
+q("Which attack makes smart grid components or information inaccessible?",["Net metering attack","Time synchronization attack","Data visualization attack","Denial of Service (DoS) attack"],3),
+q("How is IIoT described in the lecture?",["IoT in industries linking automation with enterprise, planning and product lifecycle","A consumer-only network for entertainment","A replacement for automation without networking","A system only for storing data"],0),
+q("Which approach is associated with IIoT for existing industrial systems?",["Disconnect and isolate","Rip and replace","Wrap and re-use","Remove and discard"],2),
+q("Which is the key enabling technology for V2V and V2R in ITS?",["Universal Power Line Bus","HDFS","SCADA","DSRC"],3),
+q("Which parameters can WSNs monitor in IIoT mining?",["Air quality, poisonous gases and oxygen level","Only workers’ billing amount","Only equipment colour","Only operators’ browsing history"],0),
+q("Which Big Data characteristic refers to bias, noise and abnormality?",["Value","Variability","Veracity","Volume"],2),
+q("What is the purpose of redundancy mitigation in pre-processing?",["Prevent data collection","Duplicate every data item","Convert structured data into images","Eliminate repeated data via detection, filtering and compression"],3),
+q("In HDFS, which node stores the actual data blocks?",["Datanode","Namenode","Job Tracker","YARN Resource Negotiator only"],0)]},
+12:{n:"Week 12 · Analytics & Case Studies",q:[
+q("Which analysis is used for categorical data?",["Qualitative analysis","Quantitative analysis","Regression analysis","Analysis of variance"],0),
+q("When is a statistical model complete?",["Variables equal equations","It has no variables","Variables always exceed equations","Only categorical data are used"],0),
+q("ANOVA is best applied when comparing:",["A single observation","More than two populations or samples","Non-numerical labels with no response variable","Identical copies of one observation"],1),
+q("What does Pearson’s correlation coefficient (r) measure?",["Number of equations","Maximum value in a dataset","Strength of association between two variables","Sample size"],2),
+q("What is a primary objective of AgriSens?",["Manual-only irrigation","More irrigation regardless of soil","Removing sensors from fields","More crop yield with less water"],3),
+q("Which are the three layers of AgriSens?",["Physical; transport; presentation","Sensing and actuating; processing, storage and service; application","User; billing; routing","Sensor; firewall; operating-system"],1),
+q("Which is part of an AgriSens sensor node?",["Meter data management system","Power management unit","Phasor measurement unit","Hadoop Namenode"],1),
+q("What does the AgriSens multi-user server do?",["Powers the sensor nodes","Measures soil moisture in the field","Sends field info to farmers by SMS and executes their queries and control messages","Replaces gateways with wired links"],2),
+q("Which healthcare layer holds smartphones and tablets as aggregators?",["Physical power layer","Sensing layer","Cloud platform","Aggregated layer"],3),
+q("Which is an example of IoT preventive care?",["Fall detection for senior citizens","Disabling emergency alerts","Removing sensors from patients","Paper-only medical records"],0),
+q("What is an advantage of continuous activity monitoring?",["All sensor data is discarded immediately","It prevents long-term observation","It enables daily observation of behavior and repetitive patterns","It works only with cameras"],2),
+q("Which data can the deep-learning approach analyze?",["Sensor data, images and videos","Images only","Text labels only","Sensor data only"],0),
+q("Processing activity data directly on the device is called:",["Data-aggregator selection","Network-only approach","Cloud replication","In-place approach"],3),
+q("What three elements are in the smartphone activity-monitoring demo?",["Soil sensor, pump, paddy field","Smart meter, PMU, power plant","Smartphone, network, remote server","Namenode, Datanode, Job Tracker"],2),
+q("Which sensor values are logged in the activity-monitoring demo?",["Accelerometer values","Soil-moisture values","Smart-grid voltage phasors","Water-level values"],0)]}
+};
+const E={
+1:["ITU report: humans may become a minority of traffic generators; most traffic flows between devices and things.","IoT needs scalability, clear naming/addressing and support for sleeping, mobile and non-IP nodes; connectivity can be intermittent.","Smart Dust: sand-grain-sized computing devices sprayed or injected to sense chemicals or diagnose body problems.","M2M covers machine-to-machine links; IoT is broader, including things, people, applications and systems.","Web of Things doesn’t replace sensors; they still collect physical data while web technologies expose it.","Reusing local addresses across gateway domains avoids wasting global addresses.","Gateways give Internet and LAN connectivity, get prefixes via DHCPv6 and delegate to nodes with SLAAC.","IPv6 uses 128-bit hexadecimal addresses (IPv4: 32-bit dotted decimal), suiting large-scale IoT.","A good sensor reacts to the target property, ignores unrelated ones and doesn’t alter what it measures.","Resolution is the smallest detectable change; accuracy differs, since bias or calibration errors can hurt a high-resolution sensor.","An accelerometer’s output has magnitude and direction along x, y, z, so it is a vector sensor.","Hysteresis: output depends on whether the input was approached from below or above.","Liquids are nearly incompressible, so hydraulic actuators exert large forces.","SMP actuators respond to many stimuli, recover strain well, are light and biocompatible; they aren’t just passive sensors.","Sensor data passes through the gateway and proxy server before reaching the cloud."],
+2:["The topic in a published message tells the broker where to route it.","+ is single-level, # is multilevel; house/# matches everything under house, not only house itself.","SMQTT stages: setup, encryption, publish, decryption; route discovery isn’t one.","CoAP is lightweight and runs over UDP for constrained devices.","Piggyback: the response rides in the ACK. Separate: ACK first, response later.","As presented in the lecture: GET retrieves, PUT creates, PUSH updates, DELETE deletes.","Flow frames control the message-flow rate; Transfer carries messages, Disposition reports state, Detach ends links.","Exchanges route to queues, queues store messages, bindings define the rules; consumers don’t route producer messages.","c = China, d = Japan, e = industrial, f = active RFID, g = smart utility networks.","Non-beacon networks use unslotted CSMA/CA; beacon-enabled ones use slotted CSMA/CA with superframes.","802.15.4 defines PHY and MAC (layers 1–2); ZigBee adds routing, security and mesh on top.","End devices are reduced-function, talk only to their parent and can’t relay; the coordinator is the root.","16-bit short addresses are PAN-specific (assigned by the coordinator); 64-bit extended addresses are globally unique.","In LOADng only the destination may answer an RREQ; intermediate routers must not.","Passive tags have no power supply and are energized inductively by the reader."],
+3:["Wired HART has no network layer.","Z-Wave: 908.42 MHz in the US, 868.42 MHz in Europe.","Dumb behavior depends on environmental conditions over time, so it is temporal.","The correct term is channel blacklisting, which isn’t listed, so “none of these”.","NFC = Near Field Communication.","NFC works by magnetic induction between reader and tag.","Supermarket tags are passive NFC, so the statement is false.","Bluetooth forms piconets.","An NFC reader emits a small current producing a magnetic field that bridges the devices.","Bluetooth is built on ad-hoc networking.","Z-Wave uses GFSK with Manchester encoding, not “Hongkong”.","Healing bypasses radio dead-spots in Z-Wave.","Sensor nodes have limited battery life.","The Link Manager Protocol handles link establishment, authentication and configuration.","Zigbee commonly uses 250 kbps."],
+4:["In the AID system the ultrasonic sensor gives the distance to the detected object.","The microcontroller processes the sensor data.","Nanodevices use electromagnetic or molecular communication.","Coverage implies connectivity when transmission range ≥ 2 × sensing range.","Area coverage is a standard static-WSN coverage problem; the others are networking tasks.","Fire monitoring is event-driven: nodes report when an event occurs.","A data mule visits nodes, collects data and delivers it to the sink.","Losing a critical stationary node can split the network into disconnected parts.","In human-centric sensing a person can be a data source.","Fixed nodes make deployment and topology maintenance easier.","Mobile UAVs change relative positions, so topology changes often.","Frequent topology change is the common UAV network issue.","SCADA is typically isolated and proprietary; M2M supports cross-platform integration.","Stationary nodes stay fixed and can’t move to repair connectivity.","M2M exchanges data automatically, though humans may still handle maintenance."],
+5:["Interoperability lets different devices and systems communicate and exchange data.","Syntactic interoperability is about message format.","UMB = Universal Middleware Bridge, linking middleware-based devices.","The Arduino UNO runs at 5 V.","Arduino IDE programs are called sketches.","The UNO connects to a computer by USB, for uploading and power.","Like C/C++, Arduino arrays are zero-indexed.","random() returns a pseudo-random number in a range.","traffic() sets green HIGH first (GO), then yellow, then red.","DHT sensors measure temperature and humidity.","A sensor converts a physical quantity into an electrical signal.","delay() takes milliseconds, so 2000 ms = 2 s.","A servo is a high-precision motor giving controlled rotary motion.","Servo motors give precise, controlled rotary motion.","Stepper motors are actuators, like servos, solenoids and relays."],
+6:["Python’s five types: Numbers, String, List, Tuple, Dictionary.","Functions are defined with def.","try … except handles exceptions raised in the try block.","Append mode (a) adds to the end without erasing.","PIL/Pillow handles image files (Pillow for Python 3).","TCP uses AF_INET with SOCK_STREAM; SOCK_DGRAM is UDP.","The Pi 3 Model B has 40 GPIO pins.","Raspbian and NOOBS are officially supported.","Raspberry Pi is a low-cost single-board computer.","Install the GPIO library with sudo apt-get install python-rpi.gpio.","The CSI camera slot sits between the Ethernet and HDMI ports.","raspistill -o image.jpg captures a still image.","DHT = Digital Humidity and Temperature sensor.","The relay has NO, Common and NC terminals.","The fan switches on when temperature exceeds the threshold."],
+7:["UDP sockets use SOCK_DGRAM.","sensordata() calls Adafruit_DHT.read_retry(sensor,17).","The server appends received data to Datalog.txt.","str.split(',') breaks data at commas.","Matplotlib plots and labels the sensor data.","matplotlib’s ion() enables interactive mode for live plots.","Without SDN, OSPF runs distributed on the switches.","OpenFlow was presented at ACM SIGCOMM in 2008.","With no matching flow-rule, the switch sends PACKET-IN to the controller.","The Southbound API links control and infrastructure layers (OpenFlow).","The lecture says about 200 requests per second per thread.","Centralized control: one controller decides for the whole network.","SDN in IoT gives smarter routing, simpler analysis and visibility of network resources.","Constrained nodes have limited memory, so too many control programs can’t be stored.","INPP = In Network Packet Processing in SDN-WISE."],
+8:["Static, over-provisioned networks are hard to scale, manage and afford.","The Odin agent sits at access points; the Odin master is at the controller.","Mobi-Flow predicts next location (order-K Markov) and pre-places flow-rules.","Mininet-WiFi supports wired and 802.11 networks (ONOS places controllers).","NIST: a shared pool of configurable computing resources.","Rapid elasticity is an essential NIST characteristic.","A private cloud serves a single organization.","AWS, Google Compute Engine and Azure are public clouds.","IaaS provides servers, storage, network and OS.","A hypervisor lets multiple VMs share hardware.","PaaS is middleware as a service for developers.","An SLA defines non-functional requirements and service quality.","Service accounting gathers resource usage records.","Simulators give repeatable pre-deployment testing at no cost.","CloudSim is Java-based, from the CLOUDS Lab, University of Melbourne."],
+9:["OpenStack was a Rackspace–NASA project (2010).","Horizon is the dashboard GUI.","Nova is the compute service where instances launch.","Devstack’s stack.sh installs OpenStack after local.conf is set.","Sensor-cloud virtualizes sensor nodes, offered pay-per-use.","In a traditional WSN the WSN-user handles deployment and redeployment.","The sensor-owner buys sensors and lends them to the sensor-cloud.","A WSN built for one purpose is hard to repurpose.","CoV-I uses homogeneous nodes within one region to form a virtual sensor.","The Internal Cache serves users and decides whether to re-cache from the External Cache.","Slow environmental change makes repeated sensing wasteful.","CISCO coined “fog computing”.","The cloud faces volume, latency and bandwidth limits.","Fog sits between the cloud and IoT devices.","Permanent archival storage is the cloud’s role, not the fog node’s."],
+10:["Sensors and Tags = sensory organs; networks = nerves; embedded intelligence = brain.","Smart Economy is one of six: Economy, Governance, People, Mobility, Environment, Living.","Smart Parking Lots route vehicles to empty slots and detect vacancies.","Multi-tenancy risks data leakage, a security and privacy issue.","Fusion makes large data volumes precise and accurate for better decisions.","Conflicts: the same sensor type reports different data for one location.","Signal-level fusion happens at the node or local network.","Smart parking layers: Information Collection, System Deployment, Service Dissemination.","Dedicated harvesting uses sources deliberately placed near IoT devices.","Zigbee uses 802.15.4 PHY/MAC with its own network and application layers.","X-10 controls devices over existing power lines.","TCP/IP suits single-pair, location-dependent exchange, which is poor for V2X content distribution.","The ICV band is 75 MHz (5850–5925 MHz) for DSRC.","Phase-2 = intelligent transport services on 4G LTE or DSRC.","The Ad-hoc domain has OBUs and RSUs using DSRC (802.11p)."],
+11:["Smart grids add bidirectional energy flow and two-way communication.","Smart meters are the consumer–provider interface.","ToU pricing rewards shifting usage to cheaper off-peak hours.","Net-metering bills depend on energy drawn from and sent to the grid.","A PMU samples voltage and current at its location.","Distribution intelligence finds outage sources and automates restoration.","A gateway links nearby smart meters to DAUs.","DoS attacks hit availability.","IIoT links industrial automation with enterprise, planning and lifecycle.","IIoT favours “wrap and re-use” over “rip and replace”.","DSRC enables V2V and V2R communication.","Mining WSNs monitor air quality, poisonous gases and oxygen.","Veracity covers bias, noise and abnormality.","Redundancy mitigation removes repeats via detection, filtering and compression.","Datanodes store blocks; the Namenode holds metadata."],
+12:["Qualitative analysis handles categorical data.","A complete model has equal numbers of variables and equations.","ANOVA suits comparing more than two samples.","Pearson’s r measures association strength between two continuous variables.","AgriSens aims for more yield with less water.","AgriSens layers: sensing/actuating; processing, storage and service; application.","A sensor node includes a power management unit.","The multi-user server SMSes farmers and executes their queries and controls.","Smartphones and tablets act as aggregators in the aggregated layer.","Fall detection is preventive care.","Continuous monitoring reveals daily behavior and repeating patterns.","Deep learning can analyze sensor, image and video data.","In-place processing runs on the device (power-hungry, but needs no network).","The demo uses a smartphone, a network and a remote server.","The smartphone sends accelerometer readings for logging."]};
+const app=document.getElementById("app"),L="ABCD";
+let S=null,best={},P={star:{},miss:{},sh:1,tot:0,ok:0};
+try{best=JSON.parse(localStorage.getItem("iotbest")||"{}");Object.assign(P,JSON.parse(localStorage.getItem("iotp")||"{}"))}catch(e){}
+const sp=()=>{try{localStorage.setItem("iotp",JSON.stringify(P))}catch(e){}};
+const save=(k,v)=>{if(v>(best[k]||0)){best[k]=v;try{localStorage.setItem("iotbest",JSON.stringify(best))}catch(e){}}};
+const all=()=>Object.entries(W).flatMap(([k,w])=>w.q.map((x,i)=>({...x,w:k,e:E[k][i]})));
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pc=(k,n)=>best[k]!=null?`Best: ${best[k]}/${n}`:"Not attempted";
+let dp=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e});
+const standalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+function a2hBanner(){return standalone()||P.ai||!matchMedia("(pointer:coarse)").matches?"":`<div class="a2h"><span class="lg">📲</span><div><b>Add to Home Screen</b><span class="tag">Open the quiz like an app</span></div><button class="pri" onclick="a2h()">Add</button><button class="x" onclick="P.ai=1;sp();home()" aria-label="Dismiss">✕</button></div>`}
+function a2h(){
+ if(dp){dp.prompt();dp=null;return}
+ const ios=/iphone|ipad|ipod/i.test(navigator.userAgent),
+ st=ios?["Open this page in <b>Safari</b>","Tap the <b>Share</b> button (square with an arrow)","Scroll down and tap <b>Add to Home Screen</b>","Tap <b>Add</b>"]:["Open this page in <b>Chrome</b>","Tap the <b>⋮</b> menu at the top right","Tap <b>Add to Home screen</b> (or <b>Install app</b>)","Tap <b>Add</b>"],
+ o=document.createElement("div");o.className="ov";o.onclick=e=>{if(e.target==o)o.remove()};
+ o.innerHTML=`<div class="sheet"><h3 style="margin:0 0 4px">Add to Home Screen</h3><p class="mu" style="margin:0 0 12px">${ios?"iPhone / iPad":"Android"}</p><ol>${st.map(x=>`<li>${x}</li>`).join("")}</ol><button class="pri" style="width:100%" onclick="this.closest('.ov').remove()">Got it</button></div>`;
+ document.body.appendChild(o)}
+function theme(){const d=(P.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))=="dark";P.theme=d?"light":"dark";document.documentElement.dataset.theme=P.theme;sp()}
+if(P.theme)document.documentElement.dataset.theme=P.theme;
+function home(){
+ const A=all(),acc=P.tot?Math.round(P.ok/P.tot*100)+"%":"–",r=Math.min(50,A.length);
+ const md=(f,i,t,s)=>`<button class="mode" onclick="start('${f}')"><i>${i}</i><div><b>${t}</b><span>${s}</span></div></button>`;
+ app.innerHTML=`<section class="hero"><div><h1>Master IoT, one question at a time</h1><p class="hp">${A.length} questions · 12 weekly assignments · an explanation for every answer</p></div>
+ <div class="stats"><div><b>${P.tot}</b><span>Answered</span></div><div><b>${acc}</b><span>Accuracy</span></div><div><b>${Object.keys(P.star).length}</b><span>Starred</span></div><div><b>${Object.keys(P.miss).length}</b><span>Weak spots</span></div></div></section>${a2hBanner()}
+ <h3 class="sh">Quick start</h3><div class="grid g2">
+ ${md('all','📚','Complete quiz',`All ${A.length} questions, shuffled · ${pc('all',A.length)}`)}
+ ${md('rand','🎲','Random '+r,`A fresh mix every time · ${pc('rand',r)}`)}
+ ${md('star','⭐','Starred questions',Object.keys(P.star).length+' saved')}
+ ${md('miss','🎯','Weak spots',Object.keys(P.miss).length+' often missed')}</div>
+ <label class="sw"><input type="checkbox" ${P.sh?"checked":""} onchange="P.sh=this.checked?1:0;sp()"> Shuffle answer options</label>
+ <h3 class="sh">Weekly assignments</h3><div class="grid g3">${Object.entries(W).map(([k,w])=>{const n=w.q.length,bp=best[k]!=null?Math.round(best[k]/n*100):0;return `<button class="tile" onclick="start('${k}')"><span class="wk">${k}</span><b>${w.n.split(" · ")[1]}</b><span class="tag">${n} questions · ${best[k]!=null?"Best "+best[k]+"/"+n:"Not attempted"}</span><div class="mini"><i style="width:${bp}%"></i></div></button>`}).join("")}</div>
+ <h3 class="sh">Custom quiz</h3><div class="card">${Object.keys(W).map(k=>`<label class="chip"><input type="checkbox" class="cw" value="${k}" checked><span>Week ${k}</span></label>`).join("")}<div class="row" style="margin-top:8px"><span class="mu">Questions</span><input id="cn" type="number" value="20" min="1" max="${A.length}"><button class="pri" onclick="cust()">Start custom quiz</button></div></div>`}
+function cust(){const ks=[...document.querySelectorAll(".cw:checked")].map(x=>x.value),n=+document.getElementById("cn").value||20;start("cust",shuf(all().filter(c=>ks.includes(c.w))).slice(0,n))}
+function start(m,pool){
+ pool=pool||(m=="all"?shuf(all()):m=="rand"?shuf(all()).slice(0,50):m=="star"?shuf(all().filter(c=>P.star[c.t])):m=="miss"?shuf(all().filter(c=>P.miss[c.t])):W[m].q.map((x,i)=>({...x,w:m,e:E[m][i]})));
+ if(!pool.length){alert("No questions here yet.");return}
+ pool=pool.map(c=>{if(!P.sh||c.o.length<4||c.o.some(o=>/^(True|Both|None of|Neither)/.test(o)||/Both \(a\)/.test(o)))return c;const ix=shuf([0,1,2,3]);return{...c,o:ix.map(i=>c.o[i]),a:Array.isArray(c.a)?c.a.map(x=>ix.indexOf(x)).sort():ix.indexOf(c.a)}});
+ S={m,pool,i:0,sc:0,wrong:[],done:false};ask()}
+function ask(){
+ const c=S.pool[S.i],n=S.pool.length,M=Array.isArray(c.a),F=M?'tog':'pick';
+ const mn={all:"Complete quiz",rand:"Random quiz",star:"Starred",miss:"Weak spots",cust:"Custom quiz"}[S.m]||W[S.m].n.split(" · ")[1];
+ app.innerHTML=`<div class="qw"><div class="qh"><button class="sec" onclick="home()" aria-label="Exit">✕</button><div class="qt"><b>${mn}</b><span>Question ${S.i+1} of ${n}</span></div><div class="sc">${S.sc} ✓</div></div>
+ <div class="bar"><i style="width:${S.i/n*100}%"></i></div>
+ <article class="qc"><div class="row"><span class="chip2">Week ${c.w}</span>${M?'<span class="chip2 m">Select all that apply</span>':''}<button class="sec star" onclick="star(this)" aria-label="Star question">${P.star[c.t]?"★":"☆"}</button></div>
+ <h2>${c.t}</h2>${c.o.map((o,i)=>`<button class="opt" onclick="${F}(${i})"><b>${L[i]}</b><span>${o}</span></button>`).join("")}</article>
+ <div id="nx">${M?'<button class="pri" onclick="sub()">Submit answer</button>':''}</div></div>`;window.scrollTo(0,0)}
+function star(b){const c=S.pool[S.i];if(P.star[c.t])delete P.star[c.t];else P.star[c.t]=1;b.textContent=P.star[c.t]?"★":"☆";sp()}
+function pick(i){fb(new Set([i]))}
+function tog(i){document.querySelectorAll(".opt")[i].classList.toggle("sel")}
+function sub(){fb(new Set([...document.querySelectorAll(".opt")].flatMap((b,j)=>b.classList.contains("sel")?[j]:[])))}
+function fb(sel){
+ const c=S.pool[S.i],A=[].concat(c.a),ok=sel.size==A.length&&A.every(j=>sel.has(j));
+ document.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;b.classList.remove("sel");if(A.includes(j))b.classList.add(sel.has(j)||A.length==1?"ok":"miss");else if(sel.has(j))b.classList.add("bad")});
+ P.tot++;if(ok){S.sc++;P.ok++;delete P.miss[c.t]}else{S.wrong.push(c);P.miss[c.t]=1}sp();
+ const last=S.i==S.pool.length-1;
+ if(c.e)document.getElementById("nx").insertAdjacentHTML("beforebegin",`<div class="ex"><b>Why?</b> ${c.e}</div>`);document.getElementById("nx").innerHTML=`<button class="pri" onclick="${last?'fin()':'S.i++;ask()'}">${last?"See results":"Next →"}</button>`}
+function fin(){
+ const n=S.pool.length,p=Math.round(S.sc/n*100);save(S.m,S.sc);
+ const msg=p>=90?"Outstanding! 🏆":p>=70?"Great job! 🎉":p>=50?"Good effort, keep going 💪":"Keep practising 📖";
+ app.innerHTML=`<div class="qw"><section class="rs"><div class="ring" style="--p:${p}"><div><b>${p}%</b><span>${S.sc} of ${n}</span></div></div><h1>${msg}</h1>
+ <div class="m3"><div><b>${S.sc}</b><span>Correct</span></div><div><b>${S.wrong.length}</b><span>Missed</span></div><div><b>${n}</b><span>Total</span></div></div>
+ <div class="row res"><button class="pri" onclick="start('${S.m}')">Retake</button>${S.wrong.length?`<button class="sec" onclick="start('${S.m}',shuf(S.wrong))">Retry ${S.wrong.length} missed</button>`:""}<button class="sec" onclick="home()">Home</button></div></section>
+ ${S.wrong.length?`<h3 class="sh">Review missed (${S.wrong.length})</h3>`+S.wrong.map(c=>`<div class="card rv"><span class="chip2">Week ${c.w}</span><p>${c.t}</p><div class="ca">✓ ${[].concat(c.a).map(j=>c.o[j]).join("; ")}</div>${c.e?`<div class="ex">${c.e}</div>`:""}</div>`).join(""):"<p class='mu' style='text-align:center'>Perfect score, nothing to review!</p>"}</div>`;window.scrollTo(0,0)}
+home();
+</script></body></html>
