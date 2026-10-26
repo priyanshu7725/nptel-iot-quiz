@@ -322,12 +322,19 @@
             box-shadow: var(--sh)
         }
 
+        .sw-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 24px;
+            margin-top: 14px
+        }
+
         .sw {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-top: 14px;
-            color: var(--mu)
+            color: var(--mu);
+            padding: 6px 0
         }
 
         .sw input {
@@ -1017,7 +1024,7 @@
                                                 12: ["Qualitative analysis deals with categorical data, whereas quantitative analysis is used for numerical data.", "A complete statistical model has the same number of variables as equations. If these numbers do not match, the model is incomplete.", "ANOVA is introduced as a parametric statistical technique for comparing datasets and is especially useful when more than two populations or samples are being compared.", "Pearson's correlation coefficient is used to measure the strength of association between two quantitative, continuous variables.", "AgriSens aims to improve water management by using less water while maintaining or improving crop yield, along with automatic irrigation and remote monitoring.", "The proposed AgriSens architecture is organized into a sensing and actuating layer, a processing, storage and service layer, and an application layer.", "The AgriSens sensor node contains sensors and actuators, a processing and memory unit, a wireless communication unit, and a power management unit.", "The multi-user server communicates field information to farmers through SMS and also processes farmer queries and control commands.", "The aggregated layer collects data from sensing-layer devices. Smartphones and tablets are given as examples of aggregators.", "The lecture presents fall detection, emergency situation detection, and early anomaly detection as examples of preventive care using IoT healthcare.", "Continuous monitoring helps observe daily behavior over long periods and identify repetitive patterns that can improve the reliability of activity recognition.", "The lecture states that deep-learning-based analysis can be applied to ordinary sensor data as well as image and video data.", "In the in-place approach, activity data are processed on the device itself. This is generally power intensive but does not require a network connection for the processing task.", "The demonstration uses a smartphone to generate sensor data, a network to carry the data, and a remote server to receive and process or visualize it.", "For the demonstration, the smartphone transmits accelerometer readings to the remote server, where the data are continuously logged."]
         };
 const app = document.getElementById("app"), L = "ABCD";
-        let S = null, best = {}, P = { star: {}, miss: {}, sh: 1, tot: 0, ok: 0 };
+        let S = null, best = {}, P = { star: {}, miss: {}, sh: 1, shq: 1, tot: 0, ok: 0 };
         try { best = JSON.parse(localStorage.getItem("iotbest") || "{}"); Object.assign(P, JSON.parse(localStorage.getItem("iotp") || "{}")) } catch (e) { }
         const sp = () => { try { localStorage.setItem("iotp", JSON.stringify(P)) } catch (e) { } };
         const save = (k, v) => { if (v > (best[k] || 0)) { best[k] = v; try { localStorage.setItem("iotbest", JSON.stringify(best)) } catch (e) { } } };
@@ -1047,13 +1054,13 @@ const app = document.getElementById("app"), L = "ABCD";
  ${md('rand', '🎲', 'Random ' + r, `A fresh mix every time · ${pc('rand', r)}`)}
  ${md('star', '⭐', 'Starred questions', Object.keys(P.star).length + ' saved')}
  ${md('miss', '🎯', 'Weak spots', Object.keys(P.miss).length + ' often missed')}</div>
- <label class="sw"><input type="checkbox" ${P.sh ? "checked" : ""} onchange="P.sh=this.checked?1:0;sp()"> Shuffle answer options</label>
+ <div class="sw-row"><label class="sw"><input type="checkbox" ${P.shq ? "checked" : ""} onchange="P.shq=this.checked?1:0;sp()"> Shuffle question order</label><label class="sw"><input type="checkbox" ${P.sh ? "checked" : ""} onchange="P.sh=this.checked?1:0;sp()"> Shuffle answer options</label></div>
  <h3 class="sh">Weekly assignments</h3><div class="grid g3">${Object.entries(W).map(([k, w]) => { const n = w.q.length, bp = best[k] != null ? Math.round(best[k] / n * 100) : 0; return `<button class="tile" onclick="start('${k}')"><span class="wk">${k}</span><b>${w.n.split(" · ")[1]}</b><span class="tag">${n} questions · ${best[k] != null ? "Best " + best[k] + "/" + n : "Not attempted"}</span><div class="mini"><i style="width:${bp}%"></i></div></button>` }).join("")}</div>
  <h3 class="sh">Custom quiz</h3><div class="card">${Object.keys(W).map(k => `<label class="chip"><input type="checkbox" class="cw" value="${k}" checked><span>Week ${k}</span></label>`).join("")}<div class="row" style="margin-top:8px"><span class="mu">Questions</span><input id="cn" type="number" value="20" min="1" max="${A.length}"><button class="pri" onclick="cust()">Start custom quiz</button></div></div>`
         }
         function cust() { const ks = [...document.querySelectorAll(".cw:checked")].map(x => x.value), n = +document.getElementById("cn").value || 20; start("cust", shuf(all().filter(c => ks.includes(c.w))).slice(0, n)) }
         function start(m, pool) {
-            pool = pool || (m == "all" ? shuf(all()) : m == "rand" ? shuf(all()).slice(0, 50) : m == "star" ? shuf(all().filter(c => P.star[c.t])) : m == "miss" ? shuf(all().filter(c => P.miss[c.t])) : W[m].q.map((x, i) => ({ ...x, w: m, e: E[m][i] })));
+            pool = pool || (m == "all" ? shuf(all()) : m == "rand" ? shuf(all()).slice(0, 50) : m == "star" ? shuf(all().filter(c => P.star[c.t])) : m == "miss" ? shuf(all().filter(c => P.miss[c.t])) : (P.shq ? shuf : (x => x))(W[m].q.map((x, i) => ({ ...x, w: m, e: E[m][i] }))));
             if (!pool.length) { alert("No questions here yet."); return }
             pool = pool.map(c => { if (!P.sh || c.o.length < 4 || c.o.some(o => /^(True|Both|None of|Neither)/.test(o) || /Both \(a\)/.test(o))) return c; const ix = shuf([0, 1, 2, 3]); return { ...c, o: ix.map(i => c.o[i]), a: Array.isArray(c.a) ? c.a.map(x => ix.indexOf(x)).sort() : ix.indexOf(c.a) } });
             S = { m, pool, i: 0, sc: 0, wrong: [], done: false }; ask()
